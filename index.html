@@ -29,7 +29,8 @@
             overflow-x: hidden;
         }
 
-        .product-image {
+        .product-image-featured {
+            /* Imagem de Fundo Definida no CSS */
             background-image: url('https://www.meusiteagora.com.br/Blog/imagens/Como-fazer-loja-virtual-de-moda-feminina-com-baixo-custo.webp');
             background-size: cover;
             background-position: center;
@@ -65,38 +66,41 @@
 </head>
 <body class="min-h-screen">
 
-    <!-- Cabeçalho (Navegação Intuitiva e Responsiva) -->
+    <!-- Cabeçalho (Navegação Intuitiva e Responsiva) - FIXO E UNIVERSAL -->
     <header class="bg-gray-900 shadow-xl sticky top-0 z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-            <!-- Título agora é um link clicável para a Home, conforme solicitado -->
-            <a href="#home" class="text-3xl font-bold text-yellow-300 hover:text-indigo-400 transition duration-150">Cida ModaShe</a>
+            <!-- Título agora é um link clicável para a Home, garantindo a navegação -->
+            <a href="#home" class="text-3xl font-bold text-yellow-300 hover:text-indigo-400 transition duration-150 nav-link">Cida ModaShe</a>
             
-            <!-- Opções de Menu para Desktop (Visíveis a partir de 'md') -->
-            <nav class="hidden md:flex space-x-6">
-                <a href="#home" class="text-gray-300 hover:text-indigo-400 font-semibold transition duration-150">Início</a>
-                <a href="#products" class="text-gray-300 hover:text-indigo-400 font-semibold transition duration-150">Produtos</a>
-                <a href="#promocoes" class="text-red-400 font-bold hover:text-red-500 transition duration-150">🔥 Promoções</a>
+            <!-- Opções de Menu para Desktop (AGORA VISÍVEL A PARTIR DE TELAS SM - 640px) -->
+            <!-- CORREÇÃO: Mudado de md:flex para sm:flex para garantir visibilidade em previews/tablets menores -->
+            <nav class="hidden sm:flex space-x-6">
+                <!-- Adicionado 'nav-link' a todos os itens do menu -->
+                <a href="#home" class="text-gray-300 hover:text-indigo-400 font-semibold transition duration-150 nav-link">Início</a>
+                <a href="#products" class="text-gray-300 hover:text-indigo-400 font-semibold transition duration-150 nav-link">Produtos</a>
+                <a href="#promocoes" class="text-red-400 font-bold hover:text-red-500 transition duration-150 nav-link">🔥 Promoções</a>
                 <!-- Link do Carrinho agora mostra a contagem de itens -->
-                <a href="#cart" id="cart-link" class="text-gray-300 hover:text-indigo-400 font-semibold transition duration-150">
+                <a href="#cart" id="cart-link" class="text-gray-300 hover:text-indigo-400 font-semibold transition duration-150 nav-link">
                     Carrinho (<span id="cart-count">0</span>)
                 </a>
             </nav>
             
             <!-- Botão de Menu Mobile (Visível apenas em Mobile) -->
-            <button id="menu-button" class="md:hidden text-gray-300 hover:text-indigo-400 focus:outline-none">
+            <!-- CORREÇÃO: Mudado de md:hidden para sm:hidden -->
+            <button id="menu-button" class="sm:hidden text-gray-300 hover:text-indigo-400 focus:outline-none">
                 <!-- Ícone de Menu (Lucide: Menu) -->
                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
             </button>
         </div>
 
-        <!-- Menu Mobile Toggle (Adicionado: Aparece ao Clicar no botão) -->
-        <div id="mobile-menu" class="hidden md:hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-4">
+        <!-- Menu Mobile Toggle (Aparece ao Clicar no botão) -->
+        <div id="mobile-menu" class="hidden sm:hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-4">
             <div class="flex flex-col space-y-2 pt-2 border-t border-gray-700">
-                <!-- Links duplicados para o menu mobile -->
-                <a href="#home" class="text-gray-300 hover:text-indigo-400 font-semibold transition duration-150 p-2 rounded-md hover:bg-gray-800">Início</a>
-                <a href="#products" class="text-gray-300 hover:text-indigo-400 font-semibold transition duration-150 p-2 rounded-md hover:bg-gray-800">Produtos</a>
-                <a href="#promocoes" class="text-red-400 font-bold hover:text-red-500 transition duration-150 p-2 rounded-md hover:bg-gray-800">🔥 Promoções</a>
-                <a href="#cart" id="mobile-cart-link" class="text-gray-300 hover:text-indigo-400 font-semibold transition duration-150 p-2 rounded-md hover:bg-gray-800">
+                <!-- Links duplicados para o menu mobile - Adicionado 'nav-link' -->
+                <a href="#home" class="text-gray-300 hover:text-indigo-400 font-semibold transition duration-150 p-2 rounded-md hover:bg-gray-800 nav-link">Início</a>
+                <a href="#products" class="text-gray-300 hover:text-indigo-400 font-semibold transition duration-150 p-2 rounded-md hover:bg-gray-800 nav-link">Produtos</a>
+                <a href="#promocoes" class="text-red-400 font-bold hover:text-red-500 transition duration-150 p-2 rounded-md hover:bg-gray-800 nav-link">🔥 Promoções</a>
+                <a href="#cart" id="mobile-cart-link" class="text-gray-300 hover:text-indigo-400 font-semibold transition duration-150 p-2 rounded-md hover:bg-gray-800 nav-link">
                     Carrinho (<span id="mobile-cart-count">0</span>)
                 </a>
             </div>
@@ -104,16 +108,16 @@
     </header>
 
     <!-- CONTAINER PRINCIPAL DE VIEWS -->
-    <div id="app-container">
+    <div id="app-container" class="pt-4">
 
-        <!-- 1. VIEW HOME: Detalhe do Produto e Seção de Promoções -->
+        <!-- 1. VIEW HOME: Detalhe do Produto em Destaque e Seção de Promoções -->
         <div id="home-view" class="view">
             <main class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 mt-8">
                 <section class="bg-white p-6 rounded-xl shadow-lg grid grid-cols-1 lg:grid-cols-2 gap-8">
                     
-                    <!-- Imagem e Detalhes do Produto -->
+                    <!-- Imagem e Detalhes do Produto em Destaque -->
                     <div class="space-y-6">
-                        <div class="product-image h-96 w-full rounded-lg shadow-md">
+                        <div class="product-image-featured h-96 w-full rounded-lg shadow-md">
                             <!-- Imagem de Fundo Definida no CSS -->
                         </div>
                         <h2 id="featured-product-name" class="text-3xl font-extrabold text-gray-900">Conjuntos Elegance Clean</h2>
@@ -203,7 +207,7 @@
                     </h3>
                     <div id="promotions-list" class="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <!-- Conteúdo carregado dinamicamente via JS a partir de produtos de moda -->
-                        <a href="#products" class="bg-red-700 text-white p-6 rounded-lg shadow-2xl flex flex-col justify-center items-center text-center hover:bg-red-800 transition duration-300 cursor-pointer">
+                        <a href="#products" class="bg-red-700 text-white p-6 rounded-lg shadow-2xl flex flex-col justify-center items-center text-center hover:bg-red-800 transition duration-300 cursor-pointer nav-link">
                             <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 8 22 21 2 21 2 8 12 2 22 8"/><line x1="6" x2="18" y1="13" y2="13"/><line x1="6" x2="18" y1="17" y2="17"/></svg>
                             <p class="mt-4 text-2xl font-extrabold">Filtre por Categoria!</p>
                             <p class="text-sm font-light">Todas as nossas ofertas separadas por seção.</p>
@@ -213,7 +217,7 @@
             </main>
         </div>
         
-        <!-- 2. VIEW PRODUTOS: Lista de todos os produtos por categoria (Aparece ao Filtrar) -->
+        <!-- 2. VIEW PRODUTOS: Lista de todos os produtos por categoria -->
         <div id="products-view" class="view hidden">
             <main class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 mt-8 bg-white rounded-xl shadow-lg">
                 <h2 class="text-4xl font-extrabold text-gray-900 mb-8 border-b pb-2">
@@ -225,7 +229,7 @@
             </main>
         </div>
 
-        <!-- 3. VIEW CARRINHO: Agora com produtos dinâmicos e botões de ação -->
+        <!-- 3. VIEW CARRINHO -->
         <div id="cart-view" class="view hidden">
             <main class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 mt-8 bg-white rounded-xl shadow-lg">
                 <h2 class="text-4xl font-extrabold text-gray-900 mb-6 border-b pb-2">
@@ -241,12 +245,23 @@
                 </div>
 
                 <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
-                    <a href="#home" class="bg-gray-500 text-white font-bold py-3 px-6 rounded-lg shadow-md hover:bg-gray-600 transition duration-300 text-center">
+                    <!-- Adicionado 'nav-link' -->
+                    <a href="#home" class="bg-gray-500 text-white font-bold py-3 px-6 rounded-lg shadow-md hover:bg-gray-600 transition duration-300 text-center nav-link">
                         <span class="text-2xl sm:text-lg">↩️ Continuar Comprando</span>
                     </a>
                     <button class="bg-green-600 text-white font-bold py-3 px-6 rounded-lg shadow-md hover:bg-green-700 transition duration-300 text-center">
                         <span class="text-2xl sm:text-lg">✅ Concluir a Compra</span>
                     </button>
+                </div>
+            </main>
+        </div>
+        
+        <!-- 4. VIEW DETALHE DO PRODUTO (NOVO) -->
+        <div id="detail-view" class="view hidden">
+            <main class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 mt-8 bg-white rounded-xl shadow-lg">
+                <!-- Conteúdo do produto injetado pelo JS -->
+                <div id="product-detail-content">
+                    <p class="text-center text-gray-500">Detalhes do produto carregando...</p>
                 </div>
             </main>
         </div>
@@ -326,7 +341,7 @@
             const cartItemsContainer = document.getElementById('cart-items-container');
             const cartTotalSpan = document.getElementById('cart-total');
             const cartCountSpan = document.getElementById('cart-count');
-            const mobileCartCountSpan = document.getElementById('mobile-cart-count'); // NOVO
+            const mobileCartCountSpan = document.getElementById('mobile-cart-count'); 
             const addToCartBtn = document.getElementById('add-to-cart-btn');
             const productSizeSelect = document.getElementById('product-size');
             
@@ -334,34 +349,73 @@
             const menuButton = document.getElementById('menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
 
-            // --- LÓGICA DE MENU MOBILE (NOVO) ---
-            if (menuButton && mobileMenu) {
-                menuButton.addEventListener('click', () => {
-                    mobileMenu.classList.toggle('hidden');
-                });
-                
-                // Fecha o menu ao clicar em qualquer link (Melhora UX)
-                mobileMenu.querySelectorAll('a').forEach(link => {
-                    link.addEventListener('click', () => {
-                        mobileMenu.classList.add('hidden');
-                    });
-                });
-            }
-
             // --- FUNÇÕES UTILITÁRIAS ---
             function formatCurrency(value) {
                 return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
             }
 
+            function getProductById(id) {
+                return PRODUCTS_DATA.find(p => p.id === id);
+            }
+
+            function getPriceAsFloat(priceString) {
+                if (!priceString) return 0;
+                // Converte string R$ 129,90 para float 129.90
+                return parseFloat(priceString.replace('.', '').replace(',', '.'));
+            }
+
+            // --- LÓGICA DE CARRINHO CENTRALIZADA ---
+            function addProductToCart(productId, selectedSize, sourceButton) {
+                const productData = getProductById(productId);
+
+                if (!productData) {
+                    console.error("Produto não encontrado.");
+                    return;
+                }
+                
+                const existingItem = cartItems.find(item => item.id === productId && item.size === selectedSize);
+
+                if (existingItem) {
+                    existingItem.quantity += 1; 
+                } else {
+                    cartItems.push({
+                        id: productId,
+                        size: selectedSize,
+                        quantity: 1
+                    });
+                }
+
+                updateCartCount();
+                
+                // Feedback visual rápido no botão (Substitui alert/confirm)
+                if (sourceButton) {
+                    const originalText = sourceButton.textContent;
+                    const originalBg = sourceButton.style.backgroundColor;
+                    
+                    sourceButton.textContent = '✅ Adicionado!';
+                    sourceButton.style.backgroundColor = '#10B981'; // Tailwind green-500 equivalent
+                    
+                    setTimeout(() => {
+                        sourceButton.textContent = originalText;
+                        sourceButton.style.backgroundColor = originalBg; // Volta para o original
+                    }, 1500); 
+                }
+            }
+
+
+            // --- LÓGICA DE MENU MOBILE ---
+            if (menuButton && mobileMenu) {
+                menuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+
             // --- LÓGICA DE CARREGAMENTO DE DADOS (CORRIGIDA) ---
-            // Agora usa os dados embutidos acima.
             async function fetchProducts() {
                 try {
-                    // Atribui os dados embutidos à variável global PRODUCTS_DATA
                     PRODUCTS_DATA = PRODUCTS_DATA_EMBEDDED; 
                     return PRODUCTS_DATA;
                 } catch (error) {
-                    // Este log não deve mais ocorrer, mas é mantido como fallback
                     console.error("Erro ao carregar products.json:", error); 
                     return [];
                 }
@@ -372,19 +426,9 @@
                 const count = cartItems.reduce((sum, item) => sum + item.quantity, 0);
                 cartCountSpan.textContent = count;
                 if (mobileCartCountSpan) {
-                    mobileCartCountSpan.textContent = count; // Atualiza o contador mobile
+                    mobileCartCountSpan.textContent = count; 
                 }
                 return count;
-            }
-
-            function getProductById(id) {
-                return PRODUCTS_DATA.find(p => p.id === id);
-            }
-
-            function getPriceAsFloat(priceString) {
-                if (!priceString) return 0;
-                // Converte "129,90" para 129.90
-                return parseFloat(priceString.replace('.', '').replace(',', '.'));
             }
 
             function renderCartView() {
@@ -396,7 +440,7 @@
                             <p class="text-xl text-gray-600 mb-4">
                                 Seu carrinho está vazio! Adicione alguns produtos.
                             </p>
-                            <a href="#home" class="inline-block bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg shadow-md hover:bg-indigo-700 transition duration-300">
+                            <a href="#home" class="inline-block bg-indigo-600 text-white font-bold py-3 px-6 rounded-lg shadow-md hover:bg-indigo-700 transition duration-300 nav-link">
                                 Explorar Produtos
                             </a>
                         </div>
@@ -435,80 +479,167 @@
                 cartTotalSpan.textContent = formatCurrency(total);
             }
 
-            // Adicionar produto em destaque ao carrinho
+            // Adicionar produto em destaque ao carrinho (Home View)
             if (addToCartBtn) {
-                addToCartBtn.addEventListener('click', () => {
+                addToCartBtn.addEventListener('click', (e) => {
                     const productId = addToCartBtn.getAttribute('data-product-id');
                     const selectedSize = productSizeSelect.value;
-                    const productData = getProductById(productId);
-
-                    if (!productData) {
-                        console.error("Produto em destaque não encontrado nos dados.");
-                        // Não usar alert(), mas sim uma mensagem customizada, se necessário.
-                        return;
-                    }
-                    
-                    // Verifica se o item (com o mesmo ID e tamanho) já existe
-                    const existingItem = cartItems.find(item => item.id === productId && item.size === selectedSize);
-
-                    if (existingItem) {
-                        existingItem.quantity += 1; // Aumenta a quantidade
-                    } else {
-                        // Adiciona novo item
-                        cartItems.push({
-                            id: productId,
-                            size: selectedSize,
-                            quantity: 1
-                        });
-                    }
-
-                    updateCartCount();
-                    // Redireciona para o carrinho
-                    window.location.hash = '#cart';
+                    addProductToCart(productId, selectedSize, e.currentTarget);
                 });
             }
             
-            // --- LÓGICA DE NAVEGAÇÃO SPA ---
-            function renderView() {
-                const hash = window.location.hash || '#home';
+            // --- NOVO: LÓGICA DE DETALHES DO PRODUTO ---
+            function renderProductDetail(productId) {
+                const product = getProductById(productId);
+                const container = document.getElementById('product-detail-content');
+                
+                if (!product) {
+                    container.innerHTML = '<p class="text-xl text-red-600 text-center">Produto não encontrado.</p>';
+                    return;
+                }
+
+                const isPromo = product.category === 'Promoção' && product.oldPrice && product.oldPrice !== null;
+                const priceHtml = isPromo
+                    ? `<p class="text-sm line-through text-gray-500">De: R$ ${product.oldPrice}</p>
+                       <p class="text-5xl font-extrabold text-red-600">R$ ${product.currentPrice}</p>`
+                    : `<p class="text-5xl font-extrabold text-gray-900">R$ ${product.currentPrice}</p>`;
+
+                container.innerHTML = `
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                        <!-- Coluna da Imagem -->
+                        <div>
+                            <img src="${product.imageUrl}" alt="${product.name}" class="rounded-xl shadow-2xl w-full h-auto object-cover" onerror="this.onerror=null;this.src='https://placehold.co/800x600/000000/FFF?text=Imagem+Produto+${product.id}';">
+                        </div>
+
+                        <!-- Coluna dos Detalhes e Ações -->
+                        <div class="space-y-6">
+                            <a href="#products" class="text-indigo-600 hover:text-indigo-800 font-semibold nav-link flex items-center mb-4">
+                                <!-- Icone de Seta para Voltar -->
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mr-1"><path d="m15 18-6-6 6-6"/></svg>
+                                Voltar para a Lista de Produtos
+                            </a>
+                            <h2 class="text-4xl font-bold text-gray-900">${product.name}</h2>
+                            <div class="flex items-baseline space-x-3">
+                                ${priceHtml}
+                                ${isPromo ? '<span class="text-red-600 text-lg font-bold">🔥 OFERTA!</span>' : ''}
+                            </div>
+                            
+                            <p class="text-gray-600 leading-relaxed border-t pt-4">
+                                Tecido premium de alta durabilidade e toque suave. Este item é ideal para todas as estações e ocasiões casuais, garantindo conforto e estilo.
+                                (ID do Produto: ${product.id}).
+                            </p>
+
+                            <div class="flex items-center space-x-6 pt-4">
+                                <!-- Selector de Tamanho -->
+                                <label class="block">
+                                    <span class="text-gray-700 font-semibold text-lg">Tamanho:</span>
+                                    <select id="detail-product-size" class="mt-1 block w-24 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 p-3 text-gray-700">
+                                        <option>P</option>
+                                        <option>M</option>
+                                        <option>G</option>
+                                        <option>GG</option>
+                                    </select>
+                                </label>
+
+                                <!-- Botão Adicionar ao Carrinho (Detalhe) -->
+                                <button 
+                                    id="detail-add-to-cart-btn" 
+                                    data-product-id="${product.id}"
+                                    class="btn-primary bg-indigo-600 text-white font-bold py-4 px-8 rounded-xl shadow-lg transition duration-300 hover:bg-indigo-700 text-lg self-end"
+                                >
+                                    Adicionar ao Carrinho
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                // Adiciona o Listener ao novo botão de Adicionar ao Carrinho (Detalhe View)
+                document.getElementById('detail-add-to-cart-btn').addEventListener('click', (e) => {
+                    const btn = e.currentTarget;
+                    const detailProductId = btn.getAttribute('data-product-id');
+                    const detailSelectedSize = document.getElementById('detail-product-size').value;
+                    
+                    addProductToCart(detailProductId, detailSelectedSize, btn); 
+                });
+            }
+
+            // --- LÓGICA DE NAVEGAÇÃO SPA (MELHORADA) ---
+            function renderView(hashOverride = null) {
+                const hash = hashOverride || window.location.hash || '#home';
                 const views = document.querySelectorAll('.view');
                 
+                // Esconde todas as views
                 views.forEach(view => view.classList.add('hidden'));
 
-                let activeViewId = hash.substring(1).split('-')[0] + '-view'; 
+                let activeViewId = 'home-view'; // Default fallback
 
-                if (hash === '#home' || hash === '') {
+                const hashClean = hash.substring(1); // e.g., 'detail-p001'
+
+                if (hashClean.startsWith('detail-')) {
+                    activeViewId = 'detail-view';
+                    const productId = hashClean.substring(7); // Extrai 'p001'
+                    renderProductDetail(productId); 
+                } else if (hash === '#products') {
+                    activeViewId = 'products-view';
+                } else if (hash === '#cart') {
+                    activeViewId = 'cart-view';
+                } else if (hash === '#promocoes') {
                     activeViewId = 'home-view';
-                }
-                
-                if (hash === '#promocoes') {
-                    activeViewId = 'home-view';
+                    // Rola para a seção de promoções
                     setTimeout(() => {
                         const promoSection = document.getElementById('promocoes');
                         if (promoSection) {
                             promoSection.scrollIntoView({ behavior: 'smooth' });
                         }
                     }, 100); 
+                } else {
+                    activeViewId = 'home-view';
                 }
 
                 const activeView = document.getElementById(activeViewId);
                 if (activeView) {
                     activeView.classList.remove('hidden');
-                    window.scrollTo(0, 0); 
+                    
+                    // Rola para o topo, exceto se for `#promocoes`
+                    if (hash !== '#promocoes') {
+                        window.scrollTo(0, 0); 
+                    }
 
                     if (activeViewId === 'products-view') {
                         renderProductsView(); 
                     }
                     if (activeViewId === 'cart-view') {
-                        renderCartView(); // Renderiza o conteúdo do carrinho
+                        renderCartView(); 
                     }
                 } else {
+                    // Fallback para Home
                     document.getElementById('home-view').classList.remove('hidden');
                     window.location.hash = '#home';
                 }
+
+                // Fecha o menu mobile após a navegação
+                if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                     mobileMenu.classList.add('hidden');
+                }
             }
 
-            window.addEventListener('hashchange', renderView);
+            // Adiciona listener a todos os links de navegação para forçar o render
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault(); 
+                    const newHash = link.getAttribute('href');
+                    
+                    // Altera o hash da URL
+                    window.location.hash = newHash;
+
+                    // Força a renderização da nova view baseada no novo hash
+                    renderView(newHash);
+                });
+            });
+
+
+            window.addEventListener('hashchange', () => renderView());
             
             // --- LÓGICA DE FRETE ---
             const ZONE_MAP = {
@@ -583,7 +714,8 @@
                         <img src="${product.imageUrl}" alt="${product.name}" class="rounded-md w-full h-32 object-cover mb-3" onerror="this.onerror=null;this.src='https://placehold.co/600x400/000000/FFF?text=Imagem+N/D';">
                         <p class="text-lg font-semibold text-gray-900">${product.name}</p>
                         ${priceHtml}
-                        <a href="#home" class="mt-2 w-full inline-block text-center bg-indigo-500 text-white font-bold py-2 rounded-lg hover:bg-indigo-600 transition duration-300 text-sm">
+                        <!-- NOVO LINK: Agora aponta para a Detail View com o ID do produto -->
+                        <a href="#detail-${product.id}" data-product-id="${product.id}" class="mt-2 w-full inline-block text-center bg-indigo-500 text-white font-bold py-2 rounded-lg hover:bg-indigo-600 transition duration-300 text-sm nav-link">
                             Ver Detalhes
                         </a>
                     </div>
@@ -603,7 +735,7 @@
 
                 // Adiciona o card estático (Filtre por Categoria)
                 const staticCardHtml = `
-                    <a href="#products" class="bg-red-700 text-white p-6 rounded-lg shadow-2xl flex flex-col justify-center items-center text-center hover:bg-red-800 transition duration-300 cursor-pointer">
+                    <a href="#products" class="bg-red-700 text-white p-6 rounded-lg shadow-2xl flex flex-col justify-center items-center text-center hover:bg-red-800 transition duration-300 cursor-pointer nav-link">
                         <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 8 22 21 2 21 2 8 12 2 22 8"/><line x1="6" x2="18" y1="13" y2="13"/><line x1="6" x2="18" y1="17" y2="17"/></svg>
                         <p class="mt-4 text-2xl font-extrabold">Filtre por Categoria!</p>
                         <p class="text-sm font-light">Todas as nossas ofertas separadas por seção.</p>
@@ -612,6 +744,16 @@
 
                 // Limpa e injeta os cards
                 promotionsList.innerHTML = cardsHtml + staticCardHtml;
+                
+                // Re-adicionar listeners de navegação para os novos links
+                document.querySelectorAll('#promotions-list .nav-link').forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault(); 
+                        const newHash = link.getAttribute('href');
+                        window.location.hash = newHash;
+                        renderView(newHash);
+                    });
+                });
             }
 
             // Renderiza a lista completa de produtos na Products View (Filtro de Categoria)
@@ -643,6 +785,15 @@
                 }
 
                 allProductsList.innerHTML = htmlContent;
+                 // Re-adicionar listeners de navegação para os novos links
+                document.querySelectorAll('#all-products-list .nav-link').forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault(); 
+                        const newHash = link.getAttribute('href');
+                        window.location.hash = newHash;
+                        renderView(newHash);
+                    });
+                });
             }
 
             // --- INICIALIZAÇÃO DA APP ---
@@ -661,14 +812,18 @@
 
             const geminiSuggestBtn = document.getElementById('gemini-suggest-btn');
             const geminiResultDiv = document.getElementById('gemini-result');
-            const productDescription = document.getElementById('product-description').textContent.trim();
+            
+            // Acessa o produto em destaque da Home (ID p003) para a sugestão
+            const featuredProduct = getProductById('p003');
+            const featuredProductName = featuredProduct ? featuredProduct.name : 'Vestido Floral Midi';
+            const productDescriptionText = featuredProduct ? 'Um conjunto leve e confortável, perfeito para dias quentes. Tecido de alta qualidade com caimento elegante. Disponível nos tamanhos P, M e G.' : 'Roupa casual de verão';
 
             const apiKey = ""; 
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
 
             const systemPrompt = `Você é um estilista de moda e assistente de vendas da loja Cida ModaShe. Sua tarefa é analisar o item fornecido e sugerir exatamente 3 (três) itens complementares (acessório, calçado, maquiagem, etc.) para compor um look elegante e casual para o dia. NUNCA sugira roupas. Sua resposta deve ser formatada EXCLUSIVAMENTE como um array JSON, conforme o schema. Seja conciso e focado nas tendências.`;
             
-            const userQuery = `O produto é: "Conjuntos Elegance Clean". Descrição: "${productDescription}". Me dê 3 sugestões de look.`;
+            const userQuery = `O produto é: "${featuredProductName}". Descrição: "${productDescriptionText}". Me dê 3 sugestões de look.`;
 
             const responseSchema = {
                 type: "ARRAY",
@@ -698,63 +853,64 @@
                 }
             };
 
+            if (geminiSuggestBtn) {
+                geminiSuggestBtn.addEventListener('click', async () => {
+                    // 1. Mostrar estado de carregamento
+                    geminiResultDiv.innerHTML = `
+                        <div class="flex items-center space-x-2 text-indigo-600">
+                            <div class="loading-spin"></div>
+                            <span class="font-semibold">Gerando sugestões... Aguarde.</span>
+                        </div>
+                    `;
+                    geminiSuggestBtn.disabled = true;
 
-            geminiSuggestBtn.addEventListener('click', async () => {
-                // 1. Mostrar estado de carregamento
-                geminiResultDiv.innerHTML = `
-                    <div class="flex items-center space-x-2 text-indigo-600">
-                        <div class="loading-spin"></div>
-                        <span class="font-semibold">Gerando sugestões... Aguarde.</span>
-                    </div>
-                `;
-                geminiSuggestBtn.disabled = true;
+                    try {
+                        const payload = {
+                            contents: [{ parts: [{ text: userQuery }] }],
+                            systemInstruction: { parts: [{ text: systemPrompt }] },
+                            generationConfig: {
+                                responseMimeType: "application/json",
+                                responseSchema: responseSchema
+                            }
+                        };
 
-                try {
-                    const payload = {
-                        contents: [{ parts: [{ text: userQuery }] }],
-                        systemInstruction: { parts: [{ text: systemPrompt }] },
-                        generationConfig: {
-                            responseMimeType: "application/json",
-                            responseSchema: responseSchema
+                        const response = await fetchWithRetry(apiUrl, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(payload)
+                        });
+
+                        const result = await response.json();
+                        
+                        const jsonString = result.candidates?.[0]?.content?.parts?.[0]?.text;
+
+                        if (!jsonString) {
+                            geminiResultDiv.innerHTML = '<p class="text-red-500">Erro: Não foi possível obter sugestões do estilista.</p>';
+                            return;
                         }
-                    };
 
-                    const response = await fetchWithRetry(apiUrl, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
+                        const suggestions = JSON.parse(jsonString);
 
-                    const result = await response.json();
-                    
-                    const jsonString = result.candidates?.[0]?.content?.parts?.[0]?.text;
+                        // 2. Renderizar resultados
+                        let html = '<ul class="list-disc pl-5 space-y-2">';
+                        suggestions.forEach(item => {
+                            html += `<li class="text-sm border-b border-indigo-100 pb-1">
+                                        <span class="font-bold text-indigo-700">${item.itemType}:</span> ${item.suggestion}
+                                    </li>`;
+                        });
+                        html += '</ul>';
+                        geminiResultDiv.innerHTML = html;
 
-                    if (!jsonString) {
-                        geminiResultDiv.innerHTML = '<p class="text-red-500">Erro: Não foi possível obter sugestões do estilista.</p>';
-                        return;
+                    } catch (error) {
+                        console.error("Gemini API Error:", error);
+                        geminiResultDiv.innerHTML = '<p class="text-red-500">Ops! O estilista virtual está em horário de almoço. Tente novamente mais tarde.</p>';
+                    } finally {
+                        // 3. Restaurar botão
+                        geminiSuggestBtn.disabled = false;
+                        geminiSuggestBtn.innerHTML = '✨ Gerar Sugestão de Look';
                     }
-
-                    const suggestions = JSON.parse(jsonString);
-
-                    // 2. Renderizar resultados
-                    let html = '<ul class="list-disc pl-5 space-y-2">';
-                    suggestions.forEach(item => {
-                        html += `<li class="text-sm border-b border-indigo-100 pb-1">
-                                    <span class="font-bold text-indigo-700">${item.itemType}:</span> ${item.suggestion}
-                                </li>`;
-                    });
-                    html += '</ul>';
-                    geminiResultDiv.innerHTML = html;
-
-                } catch (error) {
-                    console.error("Gemini API Error:", error);
-                    geminiResultDiv.innerHTML = '<p class="text-red-500">Ops! O estilista virtual está em horário de almoço. Tente novamente mais tarde.</p>';
-                } finally {
-                    // 3. Restaurar botão
-                    geminiSuggestBtn.disabled = false;
-                    geminiSuggestBtn.innerHTML = '✨ Gerar Sugestão de Look';
-                }
-            });
+                });
+            }
 
             // ----------------------------------------------------
             // FIM LÓGICA GEMINI API
