@@ -65,13 +65,14 @@
 </head>
 <body class="min-h-screen">
 
-    <!-- Cabeçalho (Navegação Intuitiva) -->
+    <!-- Cabeçalho (Navegação Intuitiva e Responsiva) -->
     <header class="bg-gray-900 shadow-xl sticky top-0 z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-            <!-- Cor ajustada para o tema glitter -->
-            <h1 class="text-3xl font-bold text-yellow-300">Cida ModaShe</h1>
+            <!-- Título agora é um link clicável para a Home, conforme solicitado -->
+            <a href="#home" class="text-3xl font-bold text-yellow-300 hover:text-indigo-400 transition duration-150">Cida ModaShe</a>
+            
+            <!-- Opções de Menu para Desktop (Visíveis a partir de 'md') -->
             <nav class="hidden md:flex space-x-6">
-                <!-- Links atualizados com hashes para navegação SPA -->
                 <a href="#home" class="text-gray-300 hover:text-indigo-400 font-semibold transition duration-150">Início</a>
                 <a href="#products" class="text-gray-300 hover:text-indigo-400 font-semibold transition duration-150">Produtos</a>
                 <a href="#promocoes" class="text-red-400 font-bold hover:text-red-500 transition duration-150">🔥 Promoções</a>
@@ -80,10 +81,25 @@
                     Carrinho (<span id="cart-count">0</span>)
                 </a>
             </nav>
-            <button class="md:hidden text-gray-300 hover:text-indigo-400 focus:outline-none">
+            
+            <!-- Botão de Menu Mobile (Visível apenas em Mobile) -->
+            <button id="menu-button" class="md:hidden text-gray-300 hover:text-indigo-400 focus:outline-none">
                 <!-- Ícone de Menu (Lucide: Menu) -->
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
             </button>
+        </div>
+
+        <!-- Menu Mobile Toggle (Adicionado: Aparece ao Clicar no botão) -->
+        <div id="mobile-menu" class="hidden md:hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-4">
+            <div class="flex flex-col space-y-2 pt-2 border-t border-gray-700">
+                <!-- Links duplicados para o menu mobile -->
+                <a href="#home" class="text-gray-300 hover:text-indigo-400 font-semibold transition duration-150 p-2 rounded-md hover:bg-gray-800">Início</a>
+                <a href="#products" class="text-gray-300 hover:text-indigo-400 font-semibold transition duration-150 p-2 rounded-md hover:bg-gray-800">Produtos</a>
+                <a href="#promocoes" class="text-red-400 font-bold hover:text-red-500 transition duration-150 p-2 rounded-md hover:bg-gray-800">🔥 Promoções</a>
+                <a href="#cart" id="mobile-cart-link" class="text-gray-300 hover:text-indigo-400 font-semibold transition duration-150 p-2 rounded-md hover:bg-gray-800">
+                    Carrinho (<span id="mobile-cart-count">0</span>)
+                </a>
+            </div>
         </div>
     </header>
 
@@ -310,9 +326,28 @@
             const cartItemsContainer = document.getElementById('cart-items-container');
             const cartTotalSpan = document.getElementById('cart-total');
             const cartCountSpan = document.getElementById('cart-count');
+            const mobileCartCountSpan = document.getElementById('mobile-cart-count'); // NOVO
             const addToCartBtn = document.getElementById('add-to-cart-btn');
             const productSizeSelect = document.getElementById('product-size');
             
+            // Variáveis do Menu Mobile
+            const menuButton = document.getElementById('menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            // --- LÓGICA DE MENU MOBILE (NOVO) ---
+            if (menuButton && mobileMenu) {
+                menuButton.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+                
+                // Fecha o menu ao clicar em qualquer link (Melhora UX)
+                mobileMenu.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        mobileMenu.classList.add('hidden');
+                    });
+                });
+            }
+
             // --- FUNÇÕES UTILITÁRIAS ---
             function formatCurrency(value) {
                 return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
@@ -336,6 +371,9 @@
             function updateCartCount() {
                 const count = cartItems.reduce((sum, item) => sum + item.quantity, 0);
                 cartCountSpan.textContent = count;
+                if (mobileCartCountSpan) {
+                    mobileCartCountSpan.textContent = count; // Atualiza o contador mobile
+                }
                 return count;
             }
 
@@ -380,7 +418,7 @@
 
                     html += `
                         <div class="flex items-center bg-gray-50 p-3 rounded-lg shadow-sm">
-                            <img src="${product.imageUrl}" alt="${product.name}" class="w-16 h-16 object-cover rounded-md mr-4">
+                            <img src="${product.imageUrl}" alt="${product.name}" class="w-16 h-16 object-cover rounded-md mr-4" onerror="this.onerror=null;this.src='https://placehold.co/600x400/000000/FFF?text=Imagem+N/D';">
                             <div class="flex-grow">
                                 <p class="text-lg font-semibold text-gray-800">${product.name}</p>
                                 <p class="text-sm text-gray-600">Tamanho: ${item.size} | Qtd: ${item.quantity}</p>
