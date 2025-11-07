@@ -246,6 +246,57 @@
 
 </html>
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ponteiro Mágico</title>
+  <style>
+    /* Estilo para o ponteiro mágico */
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      cursor: none; /* Esconde o cursor padrão */
+    }
+
+    .magic-pointer {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(0,212,255,1) 100%);
+      border-radius: 50%;
+      pointer-events: none;
+      box-shadow: 0 0 15px rgba(0, 212, 255, 0.8);
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease-out;
+    }
+  </style>
+</head>
+<body>
+  <div class="magic-pointer" id="magicPointer"></div>
+
+  <script>
+    // Script para movimentar o ponteiro mágico
+    const magicPointer = document.getElementById('magicPointer');
+
+    document.addEventListener('mousemove', (event) => {
+      magicPointer.style.left = `${event.pageX}px`;
+      magicPointer.style.top = `${event.pageY}px`;
+    });
+
+    document.addEventListener('mousedown', () => {
+      magicPointer.style.transform = 'translate(-50%, -50%) scale(1.5)';
+    });
+
+    document.addEventListener('mouseup', () => {
+      magicPointer.style.transform = 'translate(-50%, -50%) scale(1)';
+    });
+  </script>
+</body>
+</html>
+
 
 
 
