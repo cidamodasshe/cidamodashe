@@ -62,6 +62,15 @@
         .hidden {
             display: none !important;
         }
+        
+        /* CORREÇÃO FORÇADA DE LAYOUT: Garante que os links apareçam sempre */
+        .force-menu-flex {
+            display: flex !important;
+            align-items: center;
+            flex-wrap: wrap; /* Permite que os links quebrem a linha se a tela for muito estreita */
+            justify-content: flex-end; /* Alinha o menu à direita */
+            gap: 1.5rem; /* Espaço entre os links (Tailwind space-x-6) */
+        }
     </style>
 </head>
 <body class="min-h-screen">
@@ -70,40 +79,23 @@
     <header class="bg-gray-900 shadow-xl sticky top-0 z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
             <!-- Título agora é um link clicável para a Home, garantindo a navegação -->
-            <a href="#home" class="text-3xl font-bold text-yellow-300 hover:text-indigo-400 transition duration-150 nav-link">Cida ModaShe</a>
+            <a href="#home" class="text-3xl font-bold text-yellow-300 hover:text-indigo-400 transition duration-150 nav-link whitespace-nowrap">Cida ModaShe</a>
             
-            <!-- Opções de Menu para Desktop (AGORA VISÍVEL A PARTIR DE TELAS SM - 640px) -->
-            <!-- CORREÇÃO: Mudado de md:flex para sm:flex para garantir visibilidade em previews/tablets menores -->
-            <nav class="hidden sm:flex space-x-6">
+            <!-- Opções de Menu para Desktop (AGORA FORÇADO A SEMPRE APARECER) -->
+            <!-- CLASSE CORRIGIDA: Removido 'hidden sm:flex' e adicionado 'force-menu-flex' para visibilidade total -->
+            <nav id="permanent-nav" class="force-menu-flex">
                 <!-- Adicionado 'nav-link' a todos os itens do menu -->
                 <a href="#home" class="text-gray-300 hover:text-indigo-400 font-semibold transition duration-150 nav-link">Início</a>
                 <a href="#products" class="text-gray-300 hover:text-indigo-400 font-semibold transition duration-150 nav-link">Produtos</a>
-                <a href="#promocoes" class="text-red-400 font-bold hover:text-red-500 transition duration-150 nav-link">🔥 Promoções</a>
+                <a href="#promocoes" class="text-red-400 font-bold hover:text-red-500 transition duration-150 nav-link whitespace-nowrap">🔥 Promoções</a>
                 <!-- Link do Carrinho agora mostra a contagem de itens -->
-                <a href="#cart" id="cart-link" class="text-gray-300 hover:text-indigo-400 font-semibold transition duration-150 nav-link">
+                <a href="#cart" id="cart-link" class="text-gray-300 hover:text-indigo-400 font-semibold transition duration-150 nav-link whitespace-nowrap">
                     Carrinho (<span id="cart-count">0</span>)
                 </a>
             </nav>
             
-            <!-- Botão de Menu Mobile (Visível apenas em Mobile) -->
-            <!-- CORREÇÃO: Mudado de md:hidden para sm:hidden -->
-            <button id="menu-button" class="sm:hidden text-gray-300 hover:text-indigo-400 focus:outline-none">
-                <!-- Ícone de Menu (Lucide: Menu) -->
-                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
-            </button>
-        </div>
-
-        <!-- Menu Mobile Toggle (Aparece ao Clicar no botão) -->
-        <div id="mobile-menu" class="hidden sm:hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-4">
-            <div class="flex flex-col space-y-2 pt-2 border-t border-gray-700">
-                <!-- Links duplicados para o menu mobile - Adicionado 'nav-link' -->
-                <a href="#home" class="text-gray-300 hover:text-indigo-400 font-semibold transition duration-150 p-2 rounded-md hover:bg-gray-800 nav-link">Início</a>
-                <a href="#products" class="text-gray-300 hover:text-indigo-400 font-semibold transition duration-150 p-2 rounded-md hover:bg-gray-800 nav-link">Produtos</a>
-                <a href="#promocoes" class="text-red-400 font-bold hover:text-red-500 transition duration-150 p-2 rounded-md hover:bg-gray-800 nav-link">🔥 Promoções</a>
-                <a href="#cart" id="mobile-cart-link" class="text-gray-300 hover:text-indigo-400 font-semibold transition duration-150 p-2 rounded-md hover:bg-gray-800 nav-link">
-                    Carrinho (<span id="mobile-cart-count">0</span>)
-                </a>
-            </div>
+            <!-- Botão de Menu Mobile REMOVIDO: A navegação principal é sempre visível agora -->
+            <!-- Menu Mobile Toggle REMOVIDO -->
         </div>
     </header>
 
@@ -280,7 +272,7 @@
     <script>
         // --- ESTADO GLOBAL ---
         
-        // CORREÇÃO: DADOS DE PRODUTOS DE MODA EMBUTIDOS DIRETAMENTE NO JS para evitar o erro de 'fetch'
+        // DADOS DE PRODUTOS DE MODA EMBUTIDOS DIRETAMENTE NO JS 
         const PRODUCTS_DATA_EMBEDDED = [
             {
                 "id": "p001",
@@ -341,13 +333,13 @@
             const cartItemsContainer = document.getElementById('cart-items-container');
             const cartTotalSpan = document.getElementById('cart-total');
             const cartCountSpan = document.getElementById('cart-count');
-            const mobileCartCountSpan = document.getElementById('mobile-cart-count'); 
+            // const mobileCartCountSpan = document.getElementById('mobile-cart-count'); // REMOVIDO: Mobile menu não existe mais
             const addToCartBtn = document.getElementById('add-to-cart-btn');
             const productSizeSelect = document.getElementById('product-size');
             
-            // Variáveis do Menu Mobile
-            const menuButton = document.getElementById('menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
+            // Variáveis do Menu Mobile (REMOVIDAS)
+            // const menuButton = document.getElementById('menu-button');
+            // const mobileMenu = document.getElementById('mobile-menu');
 
             // --- FUNÇÕES UTILITÁRIAS ---
             function formatCurrency(value) {
@@ -403,12 +395,12 @@
             }
 
 
-            // --- LÓGICA DE MENU MOBILE ---
-            if (menuButton && mobileMenu) {
-                menuButton.addEventListener('click', () => {
-                    mobileMenu.classList.toggle('hidden');
-                });
-            }
+            // --- LÓGICA DE MENU MOBILE (REMOVIDA) ---
+            // if (menuButton && mobileMenu) {
+            //     menuButton.addEventListener('click', () => {
+            //         mobileMenu.classList.toggle('hidden');
+            //     });
+            // }
 
             // --- LÓGICA DE CARREGAMENTO DE DADOS (CORRIGIDA) ---
             async function fetchProducts() {
@@ -425,9 +417,9 @@
             function updateCartCount() {
                 const count = cartItems.reduce((sum, item) => sum + item.quantity, 0);
                 cartCountSpan.textContent = count;
-                if (mobileCartCountSpan) {
-                    mobileCartCountSpan.textContent = count; 
-                }
+                // if (mobileCartCountSpan) {
+                //     mobileCartCountSpan.textContent = count; 
+                // } // REMOVIDO: Mobile menu não existe mais
                 return count;
             }
 
@@ -488,7 +480,7 @@
                 });
             }
             
-            // --- NOVO: LÓGICA DE DETALHES DO PRODUTO ---
+            // --- LÓGICA DE DETALHES DO PRODUTO ---
             function renderProductDetail(productId) {
                 const product = getProductById(productId);
                 const container = document.getElementById('product-detail-content');
@@ -616,11 +608,6 @@
                     // Fallback para Home
                     document.getElementById('home-view').classList.remove('hidden');
                     window.location.hash = '#home';
-                }
-
-                // Fecha o menu mobile após a navegação
-                if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
-                     mobileMenu.classList.add('hidden');
                 }
             }
 
