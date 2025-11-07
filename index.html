@@ -8,10 +8,27 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
+        /* NOVO TEMA: Fundo Preto Glitter / Estrelado COM MAIS BRILHO */
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f7fafc; /* light gray background */
+            background-color: #0a0a0a; /* Preto quase absoluto */
+            color: #e5e7eb; /* Texto padrão claro para contraste */
+            /* Efeito de Glitter Aprimorado (Mais Brilho) */
+            background-image: 
+                /* Brilhos pequenos e sutis (Prata) */
+                radial-gradient(circle at 20% 10%, rgba(200, 200, 200, 0.4) 1px, transparent 1.5px),
+                radial-gradient(circle at 90% 60%, rgba(200, 200, 200, 0.3) 1px, transparent 1.5px),
+                /* Brilhos médios e mais visíveis (Dourado Suave) */
+                radial-gradient(circle at 50% 50%, rgba(255, 240, 180, 0.6) 1.5px, transparent 2.5px),
+                radial-gradient(circle at 30% 90%, rgba(255, 240, 180, 0.5) 1.5px, transparent 2.5px),
+                /* Brilhos grandes e raros (Branco Forte) */
+                radial-gradient(circle at 70% 20%, rgba(255, 255, 255, 0.8) 2px, transparent 3.5px),
+                radial-gradient(circle at 10% 80%, rgba(255, 255, 255, 0.7) 2px, transparent 3.5px);
+            /* Ajustando o tamanho para mais densidade e variação */
+            background-size: 100px 100px, 120px 120px, 180px 180px, 200px 200px, 250px 250px, 350px 350px;
+            overflow-x: hidden;
         }
+
         .product-image {
             background-image: url('https://www.meusiteagora.com.br/Blog/imagens/Como-fazer-loja-virtual-de-moda-feminina-com-baixo-custo.webp');
             background-size: cover;
@@ -21,46 +38,63 @@
         .btn-primary:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
-        } 
+        }
+
+        /* Adiciona animação para o botão de sugestão */
+        .loading-spin {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #fff;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body class="min-h-screen">
 
-    <!-- Cabeçalho (Navegação Intuitiva) -->
-    <header class="bg-white shadow-md sticky top-0 z-10">
+    <!-- Cabeçalho (Navegação Intuitiva) - Cor ajustada para o tema escuro -->
+    <header class="bg-gray-900 shadow-xl sticky top-0 z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-            <h1 class="text-3xl font-bold text-indigo-600">Cida ModaShe</h1>
+            <!-- Cor alterada de text-indigo-400 para text-yellow-300 -->
+            <h1 class="text-3xl font-bold text-yellow-300">Cida ModaShe</h1>
             <nav class="hidden md:flex space-x-6">
-                <a href="#" class="text-gray-600 hover:text-indigo-600 font-semibold transition duration-150">Início</a>
-                <a href="#" class="text-gray-600 hover:text-indigo-600 font-semibold transition duration-150">Produtos</a>
-                <a href="#promocoes" class="text-red-500 font-bold hover:text-red-700 transition duration-150">🔥 Promoções</a>
-                <a href="#" class="text-gray-600 hover:text-indigo-600 font-semibold transition duration-150">Carrinho</a>
+                <!-- Cores dos links ajustadas para o fundo escuro -->
+                <a href="#" class="text-gray-300 hover:text-indigo-400 font-semibold transition duration-150">Início</a>
+                <a href="#" class="text-gray-300 hover:text-indigo-400 font-semibold transition duration-150">Produtos</a>
+                <a href="#promocoes" class="text-red-400 font-bold hover:text-red-500 transition duration-150">🔥 Promoções</a>
+                <a href="#" class="text-gray-300 hover:text-indigo-400 font-semibold transition duration-150">Carrinho</a>
             </nav>
-            <button class="md:hidden text-gray-600 hover:text-indigo-600 focus:outline-none">
+            <button class="md:hidden text-gray-300 hover:text-indigo-400 focus:outline-none">
                 <!-- Ícone de Menu (Lucide: Menu) -->
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y1="18"/></svg>
             </button>
         </div>
     </header>
 
     <!-- Conteúdo Principal: Página de Produto -->
+    <!-- Mantive as sections com background branco (bg-white/bg-gray-50) para dar destaque e garantir legibilidade -->
     <main class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8 mt-8">
         <section class="bg-white p-6 rounded-xl shadow-lg grid grid-cols-1 lg:grid-cols-2 gap-8">
             
             <!-- Imagem e Detalhes do Produto -->
             <div class="space-y-6">
                 <div class="product-image h-96 w-full rounded-lg shadow-md">
-                    <!-- Placeholder de Imagem -->
+                    <!-- Imagem de Fundo Definida no CSS -->
                 </div>
                 <h2 class="text-3xl font-extrabold text-gray-900">Conjuntos Elegance Clean</h2>
                 <p class="text-indigo-600 text-4xl font-bold">R$ 129,90</p>
-                <p class="text-gray-600 leading-relaxed">
+                <p id="product-description" class="text-gray-600 leading-relaxed">
                     Um conjunto leve e confortável, perfeito para dias quentes. Tecido de alta qualidade com caimento elegante. Disponível nos tamanhos P, M e G.
                 </p>
                 <div class="flex space-x-4">
                     <label class="block">
                         <span class="text-gray-700 font-semibold">Tamanho:</span>
-                        <select class="mt-1 block w-24 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 p-2">
+                        <select id="product-size" class="mt-1 block w-24 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 p-2 text-gray-700">
                             <option>P</option>
                             <option>M</option>
                             <option>G</option>
@@ -70,6 +104,19 @@
                         Adicionar ao Carrinho
                     </button>
                 </div>
+                
+                <!-- Gemini Feature: Suggestion of Look (ADICIONADO) -->
+                <div class="bg-indigo-50 p-4 rounded-lg shadow-inner border border-indigo-200">
+                    <h4 class="text-lg font-bold text-indigo-800 mb-2">Seu Look Completo com IA</h4>
+                    <p class="text-sm text-indigo-600 mb-3">O Gemini sugere peças que combinam com este conjunto para criar um look perfeito.</p>
+                    <button id="gemini-suggest-btn" class="w-full bg-pink-500 text-white font-bold py-2 px-4 rounded-lg shadow-md hover:bg-pink-600 transition duration-300 flex items-center justify-center">
+                        ✨ Gerar Sugestão de Look
+                    </button>
+                    <div id="gemini-result" class="mt-4 text-gray-700 space-y-2">
+                        <!-- Resultados da sugestão aparecerão aqui -->
+                    </div>
+                </div>
+
             </div>
 
             <!-- Calculador de Frete (Transparência Logística) -->
@@ -87,7 +134,7 @@
                 <div class="space-y-4">
                     <label for="cep" class="block">
                         <span class="text-gray-700 font-semibold">CEP de Destino (Apenas Números):</span>
-                        <input type="text" id="cep" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 p-3" placeholder="Ex: 57083000 ou 57035000" maxlength="8">
+                        <input type="text" id="cep" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 p-3 text-gray-900" placeholder="Ex: 57083000 ou 57035000" maxlength="8">
                     </label>
 
                     <button id="calcular-frete-btn" class="w-full bg-green-500 text-white font-bold py-3 px-4 rounded-lg hover:bg-green-600 transition duration-300">
@@ -103,7 +150,7 @@
                         <span id="valor-frete" class="text-xl font-extrabold text-indigo-600"></span>
                     </div>
                     <div class="flex justify-between items-center bg-white p-3 rounded-md shadow-sm">
-                        <span class="text-gray-600">Prazo Estimado:</span>
+                        <span id="prazo-label" class="text-gray-600">Prazo Estimado:</span>
                         <span id="prazo-frete" class="text-xl font-extrabold text-indigo-600"></span>
                     </div>
                     <p class="mt-3 text-xs text-gray-500">
@@ -114,28 +161,16 @@
             </div>
         </section>
 
-        <!-- Seção de Promoções e Ofertas (Visibilidade de Ofertas) -->
-        <section id="promocoes" class="mt-12 p-8 bg-red-50 rounded-xl shadow-2xl border-4 border-red-200">
-            <h3 class="text-3xl font-extrabold text-red-700 text-center mb-6">
+        <!-- Seção de Promoções e Ofertas (Visibilidade de Ofertas) - Cor ajustada para o tema escuro -->
+        <section id="promocoes" class="mt-12 p-8 bg-gray-900 rounded-xl shadow-2xl border-4 border-red-600">
+            <h3 class="text-3xl font-extrabold text-red-400 text-center mb-6">
                 🏷️ Ofertas Imperdíveis da Semana
             </h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Card de Oferta 1 -->
-                <div class="bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition duration-300 transform hover:scale-[1.02]">
-                    <img src="https://down-br.img.susercontent.com/file/sg-11134201-23010-911wkxjju7lv12" alt="Blusa em Promoção" class="rounded-md w-full h-32 object-cover mb-3">
-                    <p class="text-lg font-semibold text-gray-900">Blusa de Algodão</p>
-                    <p class="text-sm line-through text-gray-500">De: R$ 79,90</p>
-                    <p class="text-xl font-bold text-red-600">Por: R$ 59,90</p>
-                </div>
-                <!-- Card de Oferta 2 -->
-                <div class="bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition duration-300 transform hover:scale-[1.02]">
-                    <img src="https://down-br.img.susercontent.com/file/b66cc819b7bcfda08d1cda26254668dd" alt="Calça Jeans em Promoção" class="rounded-md w-full h-32 object-cover mb-3">
-                    <p class="text-lg font-semibold text-gray-900">Calça Jeans Skinny</p>
-                    <p class="text-sm line-through text-gray-500">De: R$ 189,90</p>
-                    <p class="text-xl font-bold text-red-600">Por: R$ 149,90</p>
-                </div>
-                 <!-- Card de Oferta 3 (Usando Lucide: Filter) -->
-                <div class="bg-red-600 text-white p-6 rounded-lg shadow-2xl flex flex-col justify-center items-center text-center">
+            <!-- AQUI: Conteúdo dinâmico será injetado pelo JavaScript -->
+            <div id="promotions-list" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Conteúdo carregado dinamicamente via JS a partir de products.json -->
+                <!-- Um card estático será mantido como fallback e para propósito de design -->
+                <div class="bg-red-700 text-white p-6 rounded-lg shadow-2xl flex flex-col justify-center items-center text-center">
                     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 8 22 21 2 21 2 8 12 2 22 8"/><line x1="6" x2="18" y1="13" y2="13"/><line x1="6" x2="18" y1="17" y2="17"/></svg>
                     <p class="mt-4 text-2xl font-extrabold">Filtre por Categoria!</p>
                     <p class="text-sm font-light">Todas as nossas ofertas separadas por seção.</p>
@@ -146,7 +181,7 @@
     </main>
 
     <!-- Rodapé -->
-    <footer class="mt-12 bg-gray-800 text-white p-8">
+    <footer class="mt-12 bg-gray-900 text-white p-8">
         <div class="max-w-7xl mx-auto text-center">
             <p>&copy; 2025 Cida ModaShe - Protótipo de E-commerce (Projeto de Extensão)</p>
             <p class="text-sm mt-2">Contato: (82) 99937-3999 | E-mail: contato@cidamodashe.com.br</p>
@@ -155,29 +190,24 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // --- VARIÁVEIS DE UI ---
             const cepInput = document.getElementById('cep');
             const calcularBtn = document.getElementById('calcular-frete-btn');
             const resultadoDiv = document.getElementById('resultado-frete');
             const valorSpan = document.getElementById('valor-frete');
             const prazoSpan = document.getElementById('prazo-frete');
             const messageBox = document.getElementById('frete-message-box');
+            const prazoLabel = document.getElementById('prazo-label');
 
-            // CEP DA LOJA (ORIGEM) - 57082-095
-            const LOJA_CEP_PREFIX = '57082';
-
-            // Mapeamento de Zonas (Simulação de Distância Geográfica)
-            // Estes CEPs simulam diferentes distâncias do 57082-095 (Maceió)
+            // --- LÓGICA EXISTENTE DO FRETE ---
             const ZONE_MAP = {
-                // Zona 1: Curta Distância (0-5km)
-                '57082': 1, // Mesmo prefixo (muito perto)
-                '57083': 1, // Bairro Adjacente
-                // Zona 2: Média Distância (5-12km)
-                '57072': 2, // Bairro mais afastado
-                '57035': 2, // Litoral (Ponta Verde, distante)
-                '57051': 2, // Bairro Intermediário
+                '57082': 1, 
+                '57083': 1, 
+                '57072': 2, 
+                '57035': 2, 
+                '57051': 2, 
             };
 
-            // Função para exibir mensagem de erro/sucesso
             function showMessage(text, type = 'error') {
                 messageBox.textContent = text;
                 messageBox.classList.remove('hidden', 'bg-red-100', 'text-red-700', 'bg-green-100', 'text-green-700');
@@ -188,9 +218,8 @@
                 }
             }
             
-            // Função principal de cálculo (Simulação da Transparência Logística)
             function calcularFrete() {
-                const cep = cepInput.value.replace(/\D/g, ''); // Remove todos os não-dígitos
+                const cep = cepInput.value.replace(/\D/g, '');
                 resultadoDiv.classList.add('hidden');
                 messageBox.classList.add('hidden');
 
@@ -199,50 +228,203 @@
                     return;
                 }
 
-                // Obtém os 5 primeiros dígitos do CEP de destino
                 const destinationCepPrefix = cep.substring(0, 5);
-                
-                // Determina a zona, ou assume Zona 3 (fora do raio) se não estiver mapeado
                 const zoneId = ZONE_MAP[destinationCepPrefix] || 3;
 
                 let valorFrete;
                 let prazoEntrega;
 
                 if (zoneId === 1) {
-                    // Zona 1: Curta Distância (0-5km)
-                    // Preço: R$ 10,00 - R$ 15,00 (Média moto-entrega local)
                     valorFrete = (10 + Math.random() * 5).toFixed(2);
                     prazoEntrega = '1 a 2 horas (Rápida)';
+                    prazoLabel.textContent = 'Prazo Estimado:';
                 } else if (zoneId === 2) {
-                    // Zona 2: Média Distância (5-12km)
-                    // Preço: R$ 16,00 - R$ 25,00 (Média moto-entrega)
                     valorFrete = (16 + Math.random() * 9).toFixed(2);
                     prazoEntrega = '2 a 3 horas (Padrão)';
+                    prazoLabel.textContent = 'Prazo Estimado:';
                 } else {
-                    // Zona 3: Fora do Raio de 12km (Não Atendido)
                     showMessage('Frete indisponível. O CEP está fora do raio máximo de 12km da loja (57082-095).', 'error');
                     return;
                 }
 
-                // Exibe o resultado na tela (Transparência)
                 valorSpan.textContent = `R$ ${valorFrete.replace('.', ',')}`;
                 prazoSpan.textContent = prazoEntrega;
                 resultadoDiv.classList.remove('hidden');
                 showMessage('Cálculo realizado com sucesso! Veja o valor simulado abaixo.', 'success');
             }
 
-            // Atribui o evento ao botão
             calcularBtn.addEventListener('click', calcularFrete);
 
-            // Opcional: Permite calcular frete ao pressionar Enter no campo CEP
             cepInput.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') {
                     calcularFrete();
                 }
             });
+            
+            // --- FIM LÓGICA EXISTENTE DO FRETE ---
+
+
+            // ----------------------------------------------------
+            // LÓGICA DE CARREGAMENTO DINÂMICO DE PRODUTOS
+            // ----------------------------------------------------
+            const promotionsList = document.getElementById('promotions-list');
+            const productsJsonUrl = 'products.json'; // URL para o arquivo no GitHub
+
+            function createProductCard(product) {
+                // Se o produto não tem preço antigo, ele não está em promoção na listagem atual
+                const priceHtml = product.oldPrice && product.oldPrice !== null
+                    ? `<p class="text-sm line-through text-gray-500">De: R$ ${product.oldPrice}</p>
+                       <p class="text-xl font-bold text-red-600">Por: R$ ${product.currentPrice}</p>`
+                    : `<p class="text-xl font-bold text-gray-900">R$ ${product.currentPrice}</p>`;
+
+                return `
+                    <div class="bg-white p-4 rounded-lg shadow-md hover:shadow-xl transition duration-300 transform hover:scale-[1.02]">
+                        <img src="${product.imageUrl}" alt="${product.name}" class="rounded-md w-full h-32 object-cover mb-3" onerror="this.onerror=null;this.src='https://placehold.co/600x400/000000/FFF?text=Imagem+N/D';">
+                        <p class="text-lg font-semibold text-gray-900">${product.name}</p>
+                        ${priceHtml}
+                        <button class="mt-2 w-full bg-indigo-500 text-white font-bold py-2 rounded-lg hover:bg-indigo-600 transition duration-300">
+                            Ver Detalhes
+                        </button>
+                    </div>
+                `;
+            }
+
+            async function loadPromotions() {
+                try {
+                    const response = await fetch(productsJsonUrl);
+                    if (!response.ok) {
+                        console.error("Falha ao buscar dados de produtos: " + response.status);
+                        // Mantém apenas o card de filtro como fallback
+                        return;
+                    }
+                    const products = await response.json();
+                    
+                    // Filtra apenas produtos na categoria "Promoção" para esta seção
+                    const promotionProducts = products.filter(p => p.category === 'Promoção');
+                    
+                    // Gera o HTML dos cards de promoção
+                    let cardsHtml = promotionProducts.map(createProductCard).join('');
+
+                    // Adiciona o card de filtro estático (que já estava lá)
+                    const staticCard = promotionsList.innerHTML;
+                    
+                    // Injeta os cards de promoção antes do card estático
+                    promotionsList.innerHTML = cardsHtml + staticCard;
+
+                } catch (error) {
+                    console.error("Erro ao processar produtos:", error);
+                    // Em caso de erro, só o card estático aparece
+                }
+            }
+
+            loadPromotions();
+            
+            // ----------------------------------------------------
+            // LÓGICA GEMINI API: SUGESTÃO DE LOOK (INTACTA)
+            // ----------------------------------------------------
+
+            const geminiSuggestBtn = document.getElementById('gemini-suggest-btn');
+            const geminiResultDiv = document.getElementById('gemini-result');
+            const productDescription = document.getElementById('product-description').textContent.trim();
+
+            const apiKey = ""; // Chave da API do Gemini (automaticamente fornecida)
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+
+            const systemPrompt = `Você é um estilista de moda e assistente de vendas da loja Cida ModaShe. Sua tarefa é analisar o item fornecido e sugerir exatamente 3 (três) itens complementares (acessório, calçado, maquiagem, etc.) para compor um look elegante e casual para o dia. NUNCA sugira roupas. Sua resposta deve ser formatada EXCLUSIVAMENTE como um array JSON, conforme o schema. Seja conciso e focado nas tendências.`;
+            
+            const userQuery = `O produto é: "Conjuntos Elegance Clean". Descrição: "${productDescription}". Me dê 3 sugestões de look.`;
+
+            // Estrutura de resposta JSON desejada
+            const responseSchema = {
+                type: "ARRAY",
+                items: {
+                    type: "OBJECT",
+                    properties: {
+                        "itemType": { "type": "STRING", "description": "Tipo de item: Cinto, Bolsa, Calçado, Maquiagem, etc." },
+                        "suggestion": { "type": "STRING", "description": "Nome da sugestão, cor e breve descrição de estilo." }
+                    },
+                    "propertyOrdering": ["itemType", "suggestion"]
+                }
+            };
+
+            const fetchWithRetry = async (url, options, retries = 3) => {
+                for (let i = 0; i < retries; i++) {
+                    try {
+                        const response = await fetch(url, options);
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        return response;
+                    } catch (error) {
+                        if (i === retries - 1) throw error;
+                        const delay = Math.pow(2, i) * 1000;
+                        await new Promise(resolve => setTimeout(resolve, delay));
+                    }
+                }
+            };
+
+
+            geminiSuggestBtn.addEventListener('click', async () => {
+                // 1. Mostrar estado de carregamento
+                geminiResultDiv.innerHTML = `
+                    <div class="flex items-center space-x-2 text-indigo-600">
+                        <div class="loading-spin"></div>
+                        <span class="font-semibold">Gerando sugestões... Aguarde.</span>
+                    </div>
+                `;
+                geminiSuggestBtn.disabled = true;
+
+                try {
+                    const payload = {
+                        contents: [{ parts: [{ text: userQuery }] }],
+                        systemInstruction: { parts: [{ text: systemPrompt }] },
+                        generationConfig: {
+                            responseMimeType: "application/json",
+                            responseSchema: responseSchema
+                        }
+                    };
+
+                    const response = await fetchWithRetry(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    const result = await response.json();
+                    
+                    const jsonString = result.candidates?.[0]?.content?.parts?.[0]?.text;
+
+                    if (!jsonString) {
+                        geminiResultDiv.innerHTML = '<p class="text-red-500">Erro: Não foi possível obter sugestões do estilista.</p>';
+                        return;
+                    }
+
+                    const suggestions = JSON.parse(jsonString);
+
+                    // 2. Renderizar resultados
+                    let html = '<ul class="list-disc pl-5 space-y-2">';
+                    suggestions.forEach(item => {
+                        html += `<li class="text-sm border-b border-indigo-100 pb-1">
+                                    <span class="font-bold text-indigo-700">${item.itemType}:</span> ${item.suggestion}
+                                </li>`;
+                    });
+                    html += '</ul>';
+                    geminiResultDiv.innerHTML = html;
+
+                } catch (error) {
+                    console.error("Gemini API Error:", error);
+                    geminiResultDiv.innerHTML = '<p class="text-red-500">Ops! O estilista virtual está em horário de almoço. Tente novamente mais tarde.</p>';
+                } finally {
+                    // 3. Restaurar botão
+                    geminiSuggestBtn.disabled = false;
+                    geminiSuggestBtn.innerHTML = '✨ Gerar Sugestão de Look';
+                }
+            });
+
+            // ----------------------------------------------------
+            // FIM LÓGICA GEMINI API
+            // ----------------------------------------------------
         });
     </script>
 </body>
-
 </html>
-
