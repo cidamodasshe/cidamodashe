@@ -1,2 +1,2 @@
-# cidamodashe
+# Cida ModaShe
 cida-she
