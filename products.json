@@ -1,34 +1,191 @@
-[
-  {
-    "id": "p001",
-    "name": "Blusa de Algodão Listrada",
-    "category": "Promoção",
-    "oldPrice": "79,90",
-    "currentPrice": "59,90",
-    "imageUrl": "https://down-br.img.susercontent.com/file/sg-11134201-23010-911wkxjju7lv12"
-  },
-  {
-    "id": "p002",
-    "name": "Calça Jeans Skinny Cintura Alta",
-    "category": "Promoção",
-    "oldPrice": "189,90",
-    "currentPrice": "149,90",
-    "imageUrl": "https://down-br.img.susercontent.com/file/b66cc819b7bcfda08d1cda26254668dd"
-  },
-  {
-    "id": "p003",
-    "name": "Vestido Floral Midi",
-    "category": "Nova Coleção",
-    "oldPrice": "359,99"
-    "currentPrice": "250,00",
-    "imageUrl": "https://placehold.co/600x400/FFD700/000?text=Vestido+Floral"
-  },
-  {
-    "id": "p004",
-    "name": "Jaqueta Corta-Vento Rosa",
-    "category": "Promoção",
-    "oldPrice": "199,90",
-    "currentPrice": "129,90",
-    "imageUrl": "https://tse2.mm.bing.net/th/id/OIP.seyut7j2eTUq57PzktREwgHaKu?rs=1&pid=ImgDetMain&o=7&rm=3"
-  }
-]
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Produtos</title>
+    <!-- Carrega Tailwind CSS para estilização -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Define a fonte Inter como padrão */
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen p-4 sm:p-8">
+
+    <div id="app" class="max-w-6xl mx-auto">
+        <header class="text-center py-6 mb-8 bg-white shadow-lg rounded-xl">
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-indigo-700">Catálogo de Produtos</h1>
+            <p class="text-gray-500 mt-2">Veja nossos produtos mais recentes.</p>
+        </header>
+
+        <main>
+            <div id="product-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Cards de produtos serão inseridos aqui pelo JavaScript -->
+                <p id="loading-message" class="col-span-full text-center text-lg text-gray-600">
+                    Carregando produtos...
+                </p>
+            </div>
+        </main>
+
+        <!-- Mensagem de erro customizada (substitui alert()) -->
+        <div id="modal-error" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+            <div class="bg-white p-6 rounded-lg shadow-2xl max-w-sm w-full transform transition-all">
+                <h2 class="text-xl font-bold text-red-600 mb-3">Erro de Aplicação</h2>
+                <p id="modal-error-text" class="text-gray-700"></p>
+                <button onclick="document.getElementById('modal-error').classList.add('hidden')"
+                        class="mt-4 w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-2 rounded-lg transition duration-150 shadow-md">
+                    Fechar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- Dados de Produtos Embutidos (Mock Data) ---
+        // A correção foi feita aqui: Em vez de tentar buscar um arquivo externo (que falha no sandbox),
+        // definimos os dados de forma interna.
+        const MOCK_PRODUCTS = [
+            {
+                id: 1,
+                name: "Notebook Essencial i5",
+                description: "Um notebook leve e potente para produtividade diária e estudos.",
+                price: 3500.00,
+                imageUrl: "https://placehold.co/400x300/4F46E5/FFFFFF?text=Notebook+Essencial"
+            },
+            {
+                id: 2,
+                name: "Smartphone Ultra Pro",
+                description: "Câmera tripla de 200MP e processador ultrarrápido de última geração.",
+                price: 1899.99,
+                imageUrl: "https://placehold.co/400x300/10B981/FFFFFF?text=Smartphone+Ultra"
+            },
+            {
+                id: 3,
+                name: "Monitor Gamer 27\" Curvo",
+                description: "165Hz de taxa de atualização e tempo de resposta de 1ms. Ideal para jogos.",
+                price: 1250.50,
+                imageUrl: "https://placehold.co/400x300/F59E0B/FFFFFF?text=Monitor+Gamer"
+            },
+            {
+                id: 4,
+                name: "Headphone Bluetooth Max",
+                description: "Cancelamento de ruído ativo e bateria de longa duração.",
+                price: 499.00,
+                imageUrl: "https://placehold.co/400x300/EF4444/FFFFFF?text=Headphone+Max"
+            },
+        ];
+
+        /**
+         * Simula o carregamento dos dados dos produtos.
+         * Esta função foi corrigida para usar os dados embutidos (MOCK_PRODUCTS)
+         * em vez de fazer uma chamada 'fetch' que falhava.
+         * @returns {Promise<Array<Object>>} Uma promessa que resolve com a lista de produtos.
+         */
+        function fetchProducts() {
+            // Simula um pequeno atraso para melhor experiência de usuário
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    resolve(MOCK_PRODUCTS);
+                }, 500); // 500ms de atraso simulado
+            });
+        }
+
+        /**
+         * Exibe uma mensagem de erro na tela usando um modal customizado.
+         * @param {string} message A mensagem de erro a ser exibida.
+         */
+        function displayError(message) {
+            const modal = document.getElementById('modal-error');
+            const errorText = document.getElementById('modal-error-text');
+            errorText.textContent = message;
+            modal.classList.remove('hidden');
+        }
+
+        /**
+         * Cria e retorna o elemento HTML (card) de um produto.
+         * @param {Object} product O objeto de produto.
+         * @returns {HTMLElement} O elemento do card de produto.
+         */
+        function createProductCard(product) {
+            const card = document.createElement('div');
+            card.className = 'bg-white rounded-xl shadow-xl overflow-hidden transform hover:scale-[1.02] transition duration-300 border border-gray-100';
+
+            // Formatação do preço para moeda brasileira (BRL)
+            const formattedPrice = product.price.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+            });
+
+            card.innerHTML = `
+                <img src="${product.imageUrl}" alt="${product.name}"
+                     class="w-full h-48 object-cover object-center"
+                     onerror="this.onerror=null; this.src='https://placehold.co/400x300/CCCCCC/000000?text=Sem+Imagem';">
+
+                <div class="p-5">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2 truncate">${product.name}</h3>
+                    <p class="text-sm text-gray-500 mb-4 h-12 overflow-hidden">${product.description}</p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-2xl font-extrabold text-indigo-600">${formattedPrice}</span>
+                        <button onclick="handleAddToCart(${product.id}, '${product.name}')"
+                                class="bg-indigo-600 text-white font-semibold py-2 px-4 rounded-lg
+                                       hover:bg-indigo-700 transition duration-150 shadow-md
+                                       focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+                            Comprar
+                        </button>
+                    </div>
+                </div>
+            `;
+            return card;
+        }
+
+        /**
+         * Lida com o evento de adicionar um produto ao carrinho.
+         * @param {number} productId O ID do produto.
+         * @param {string} productName O nome do produto.
+         */
+        function handleAddToCart(productId, productName) {
+            // Em vez de usar alert(), usamos o modal customizado para feedback
+            displayError(`Produto adicionado ao carrinho (ID: ${productId}): ${productName}.`);
+        }
+
+        /**
+         * Inicializa o aplicativo: carrega os produtos e renderiza a lista.
+         */
+        async function initializeApp() {
+            const productListContainer = document.getElementById('product-list');
+            const loadingMessage = document.getElementById('loading-message');
+
+            try {
+                // 1. Carrega os produtos usando a função corrigida
+                const products = await fetchProducts();
+
+                // 2. Remove a mensagem de carregamento
+                loadingMessage.remove();
+
+                // 3. Verifica se há produtos para exibir
+                if (products.length === 0) {
+                    productListContainer.innerHTML = '<p class="col-span-full text-center text-xl text-gray-500">Nenhum produto encontrado.</p>';
+                    return;
+                }
+
+                // 4. Renderiza os cards de produtos
+                products.forEach(product => {
+                    const card = createProductCard(product);
+                    productListContainer.appendChild(card);
+                });
+
+            } catch (error) {
+                console.error("Erro fatal ao inicializar o aplicativo:", error);
+                // Exibe erro na tela caso algo inesperado aconteça
+                loadingMessage.textContent = 'Erro ao carregar os dados. Por favor, tente novamente.';
+                displayError(`Falha ao carregar o catálogo de produtos: ${error.message}`);
+            }
+        }
+
+        // Inicia a aplicação após o carregamento da janela
+        window.onload = initializeApp;
+
+    </script>
+</body>
+</html>
